@@ -1,16 +1,14 @@
 
-<p align="center">
-  <img alt="IconExtract Logo" />
-  <h1 align="center">IconExtract</h1>
-</p>
+![app 64x64](https://user-images.githubusercontent.com/79826944/152642165-39eff34a-3483-4572-8e83-a26c58211a6a.png)
+# IconExtract
 
-## What is IconExtract?
+## What is it?
 IconExtract is a simple app to open a dll or exe and extract the icons in multiple formats. This project was mainly started as an experiment to test out WinUI3.
 
 ## Project Status
 The project is currently under early development and some features like export do not work at all.
 
-## Building from source
+## Building the project
 
 ### 1: Prerequisites
 
@@ -33,4 +31,4 @@ To build the app in development mode, open the sln file in Visual Studio (IconEx
 
 ## Contributing
 
-Want to contribute to this project? Feel free to open an [issue](https://github.com/puppetsw/iconextract/issues)or [pull request](https://github.com/puppetsw/iconextract/pulls). Contributing guidelines have not been created yet.
+Want to contribute to this project? Feel free to open an [issue](https://github.com/puppetsw/iconextract/issues) or [pull request](https://github.com/puppetsw/iconextract/pulls). Contributing guidelines have not been created yet.
