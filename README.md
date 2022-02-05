@@ -14,9 +14,9 @@ The project is currently under early development and some features like export d
 
 - [Git](https://git-scm.com)
 - [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
-- Universal Windows Platform development
-- .NET Desktop Development
-- Desktop development with C++
+  - Universal Windows Platform development
+  - .NET Desktop Development
+  - Desktop development with C++
 - [Windows App SDK](https://docs.microsoft.com/en-us/windows/apps/windows-app-sdk/)
 
 ### 2: Clone the repository.
