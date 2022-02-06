@@ -3,7 +3,9 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Linq;
+using Windows.Storage;
 using IconExtract.Models;
+using IconExtract.Services.Implementation;
 using IconExtract.Services.Interfaces;
 using Microsoft.Toolkit.Mvvm.Input;
 
@@ -13,6 +15,7 @@ namespace IconExtract.ViewModels
     {
         private readonly IExtractService _extractService;
         private readonly IDialogService _dialogService;
+        private readonly IExportService _exportService;
 
         private ObservableCollection<IconObject> _icons;
 
@@ -62,10 +65,11 @@ namespace IconExtract.ViewModels
 
         public ICommand ExportCommand { get; }
 
-        public MainPageViewModel(IExtractService extractService, IDialogService dialogService)
+        public MainPageViewModel(IExtractService extractService, IDialogService dialogService, IExportService exportService)
         {
             _extractService = extractService;
             _dialogService = dialogService;
+            _exportService = exportService;
 
             Icons = new ObservableCollection<IconObject>();
             SelectedItems = new List<IconObject>();
@@ -73,6 +77,7 @@ namespace IconExtract.ViewModels
 
             // Commands
             OpenFileCommand = new AsyncRelayCommand(OpenFile);
+            ExportCommand = new AsyncRelayCommand(ExportTo);
         }
 
         private async Task OpenFile()
@@ -91,6 +96,16 @@ namespace IconExtract.ViewModels
             Icons = new ObservableCollection<IconObject>(imageList);
             DisplayName = file.Name;
             OnPropertyChanged(nameof(ShowEmptyText));
+        }
+
+        private async Task ExportTo()
+        {
+            (ExportFormat exportFormat, IStorageFolder storageFolder) = await _exportService.ShowDialog();
+
+            if (exportFormat != ExportFormat.None && storageFolder is not null)
+            {
+                await _exportService.ExportTo(SelectedItems, exportFormat, storageFolder);
+            }
         }
 
         public void SelectItems(IEnumerable<IconObject> addedItems, IEnumerable<IconObject> removedItems)

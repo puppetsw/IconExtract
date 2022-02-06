@@ -20,8 +20,6 @@ namespace IconExtract
 
         private IServiceProvider Services { get; }
 
-        public static IntPtr MainWindowHandle { get; private set; }
-
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -42,11 +40,12 @@ namespace IconExtract
 
                 // TODO Settings:
 
-                // TODO: Dialogs:
+                // Dialogs:
                 .AddSingleton<IDialogService, DialogService>()
 
                 // Helpers:
                 .AddSingleton<IExtractService, ExtractService>()
+                .AddScoped<IExportService, ExportService>()
 
                 // ViewModels:
                 .AddScoped<MainPageViewModel>()
@@ -68,7 +67,6 @@ namespace IconExtract
         {
             _window = new MainWindow();
             _window.Activate();
-            MainWindowHandle = WinRT.Interop.WindowNative.GetWindowHandle(_window);
         }
     }
 }

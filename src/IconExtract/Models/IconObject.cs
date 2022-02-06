@@ -1,30 +1,27 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using System.Drawing;
 using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace IconExtract.Models
 {
-    public class IconObject : ObservableObject
+    public class IconObject
     {
-        private int _index;
+        public int Index { get; }
 
-        public int Index
+        public BitmapImage Image { get; }
+
+        public Bitmap Bitmap { get; }
+
+        public string FileName { get; }
+
+        public byte[] BitmapData { get; }
+
+        public IconObject(string fileName, int index, BitmapImage image, Bitmap bitmap, byte[] bitmapData)
         {
-            get => _index;
-            set => SetProperty(ref _index, value);
-        }
-
-        private BitmapImage _image;
-
-        public BitmapImage Image
-        {
-            get => _image;
-            set => SetProperty(ref _image, value);
-        }
-
-        public IconObject(int index, BitmapImage image)
-        {
-            _index = index;
-            _image = image;
+            Index = index;
+            Image = image;
+            FileName = fileName;
+            Bitmap = bitmap;
+            BitmapData = bitmapData;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using IconExtract.Helpers;
+﻿using IconExtract.Helpers;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 
@@ -13,14 +12,16 @@ namespace IconExtract
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        public static AppWindow AppWindow { get; private set; }
+        private static AppWindow AppWindow { get; set; }
+
+        public static MainWindow Default { get; private set; }
 
         public MainWindow()
         {
             this.InitializeComponent();
             AppWindow = this.GetAppWindow();
             AppWindow.Title = "IconExtract";
-            AppWindow.SetIcon("Assets\\app.ico");
+            Default = this;
         }
     }
 }

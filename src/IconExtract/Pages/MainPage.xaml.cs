@@ -16,10 +16,13 @@ namespace IconExtract.Pages
     {
         public MainPageViewModel ViewModel { get; } = Ioc.Default.GetRequiredService<MainPageViewModel>();
 
+        public static MainPage MainPageInstance { get; private set; }
+
         public MainPage()
         {
             InitializeComponent();
             ImageGridView.SelectionChanged += GridViewOnSelectionChanged;
+            MainPageInstance = this;
         }
         private void GridViewOnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {

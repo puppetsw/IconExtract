@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using IconExtract.Helpers;
 using IconExtract.Services.Interfaces;
-using WinRT;
 
 namespace IconExtract.Services.Implementation
 {
@@ -15,13 +14,7 @@ namespace IconExtract.Services.Implementation
         public async Task<IStorageFile> ShowDialog()
         {
             var filePicker = new FileOpenPicker();
-
-            //Get the Window's HWND
-            var hwnd = App.MainWindowHandle;
-            //https://github.com/microsoft/microsoft-ui-xaml/issues/4100
-            //Make folder Picker work in Win32
-            var initializeWithWindow = filePicker.As<IInitializeWithWindow>();
-            initializeWithWindow.Initialize(hwnd);
+            filePicker.SetOwnerWindow(MainWindow.Default);
 
             foreach (string fileExtension in FileExtensions)
             {
@@ -36,15 +29,6 @@ namespace IconExtract.Services.Implementation
             }
 
             return folder;
-        }
-
-
-        [ComImport]
-        [Guid("3E68D4BD-7135-4D10-8018-9FB6D9F33FA1")]
-        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-        private interface IInitializeWithWindow
-        {
-            void Initialize(IntPtr hwnd);
         }
     }
 }

@@ -34,6 +34,7 @@
             </AppBarButton>
 
             <AppBarButton x:Name="Export" Label="Export"
+                          Command="{x:Bind ViewModel.ExportCommand, Mode=OneWay}"
                           IsEnabled="{x:Bind ViewModel.CanExport, Mode=OneWay}">
                 <FontIcon Glyph="&#xEDE1;"/>
             </AppBarButton>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using IconExtract.Models;
@@ -30,18 +31,19 @@ namespace IconExtract.Services.Implementation
             try
             {
                 int iconCount = (int)ExtractIcon(currentProc.Handle, file.Path, -1);
-                for (int i = 0; i < iconCount; i++)
+                for (int index = 0; index < iconCount; index++)
                 {
-                    hIcon = ExtractIcon(currentProc.Handle, file.Path, i);
+                    hIcon = ExtractIcon(currentProc.Handle, file.Path, index);
 
                     using var icon = Icon.FromHandle(hIcon);
 
-                    var image = icon.ToBitmap();
-                    var bitmapData = (byte[])new ImageConverter().ConvertTo(image, typeof(byte[]));
+                    var bitmap = icon.ToBitmap();
+                    var bitmapData = (byte[])new ImageConverter().ConvertTo(bitmap, typeof(byte[]));
                     var bitmapImage = await ConvertImage(bitmapData);
 
-                    var iconObject = new IconObject(i, bitmapImage);
+                    var iconObject = new IconObject(Path.GetFileNameWithoutExtension(file.Name), index, bitmapImage, bitmap, bitmapData);
                     iconsList.Add(iconObject);
+                    DestroyIcon(hIcon);
                 }
             }
             catch (Exception ex)
@@ -53,9 +55,7 @@ namespace IconExtract.Services.Implementation
             {
                 if(hIcon != IntPtr.Zero)
                 {
-#pragma warning disable CA1806 // Do not ignore method results
                     DestroyIcon(hIcon);
-#pragma warning restore CA1806 // Do not ignore method results
                 }
             }
 
