@@ -6,7 +6,7 @@
 IconExtract is a simple app to open a dll or exe and extract the icons in multiple formats. This project was mainly started as an experiment to test out WinUI3.
 
 ## Project Status
-The project is currently under early development and some features like export do not work at all. I would like to add a TabView for each file that is opened. 
+The project is currently under early development and some features are not implemented, and UI is not final.
 
 ## Building the project
 
