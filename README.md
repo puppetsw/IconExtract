@@ -1,5 +1,4 @@
 # IconExtract
-![app 64x64](https://user-images.githubusercontent.com/79826944/152642165-39eff34a-3483-4572-8e83-a26c58211a6a.png)
 
 ## What is it?
 IconExtract is a simple app to open a dll or exe and extract the icons in multiple formats. This project was mainly started as an experiment to test out WinUI3.
